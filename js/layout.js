@@ -1,0 +1,108 @@
+// js/layout.js
+
+const vkSvg = `
+  <svg class="vk-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect width="24" height="24" rx="5" fill="#0077FF"/>
+    <path d="M12.8 17.6C6.6 17.6 3 13.8 2.9 7.5h3c.1 4.7 2.4 6.7 3.9 7V7.5h2.8v4.2c1.6-.2 3.2-1.9 3.8-4.2h2.8c-.4 2.1-2.2 3.9-3.5 4.6 1.3.5 3.4 2.1 4.2 5.5h-3.1c-.5-1.9-2.1-3.4-4.1-3.6v3.6h-1z" fill="white"/>
+  </svg>
+`;
+
+const headerHTML = `
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <a class="topbar__link" href="tel:+79591635000">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+        +7 959 163-50-00
+      </a>
+      <span class="topbar__divider" aria-hidden="true"></span>
+      <span class="topbar__text">Пн — выходной · Вт–Чт 08:00–17:00 · Пт–Сб 08:00–18:00 · Вс 08:00–17:00</span>
+      <a class="topbar__link topbar__link--right" href="https://vk.ru/club240399333" target="_blank" rel="noopener">
+        ${vkSvg}
+        ВКонтакте
+      </a>
+    </div>
+  </div>
+  <div class="header-main">
+    <div class="container header-main__inner">
+      <a class="logo" href="index.html" aria-label="Улов 100 Пудов — на главную">
+        <img src="img/logo.png" alt="Улов 100 Пудов" class="logo__mark">
+        <span class="logo__text">
+          <span class="logo__title">Улов 100 Пудов</span>
+          <span class="logo__subtitle">рыболовный магазин</span>
+        </span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Основное меню">
+        <a class="nav__link" href="index.html">Главная</a>
+        <a class="nav__link" href="catalog.html">Каталог</a>
+        <a class="nav__link" href="reviews.html">Отзывы</a>
+        <a class="nav__link" href="contacts.html">Контакты</a>
+      </nav>
+      <div class="header-actions">
+        <a class="cart-btn" href="cart.html" aria-label="Корзина">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M2 3h3l2.4 11.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 7H6"/></svg>
+          <span class="cart-btn__count" data-cart-count>0</span>
+        </a>
+        <button class="burger" type="button" data-burger aria-label="Открыть меню" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+`;
+
+const footerHTML = `
+  <div class="container footer__grid">
+    <div class="footer__col">
+      <a class="logo logo--footer" href="index.html">
+        <img src="img/logo.png" alt="Улов 100 Пудов" class="logo__mark">
+        <span class="logo__text">
+          <span class="logo__title">Улов 100 Пудов</span>
+          <span class="logo__subtitle">рыболовный магазин</span>
+        </span>
+      </a>
+      <p class="footer__about">Снасти, прикормка и снаряжение для фидера, карпфишинга и поплавочной ловли.</p>
+    </div>
+    <div class="footer__col">
+      <h3 class="footer__title">Каталог</h3>
+      <ul class="footer__list">
+        <li><a href="catalog.html?category=Удилища">Удилища</a></li>
+        <li><a href="catalog.html?category=Лески и шнуры">Лески и шнуры</a></li>
+        <li><a href="catalog.html?category=Прикормка и насадки">Прикормка и насадки</a></li>
+        <li><a href="catalog.html">Все товары</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h3 class="footer__title">Информация</h3>
+      <ul class="footer__list">
+        <li><a href="reviews.html">Отзывы</a></li>
+        <li><a href="contacts.html">Контакты</a></li>
+        <li><a href="privacy.html">Политика конфиденциальности</a></li>
+        <li><a href="terms.html">Условия продажи</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h3 class="footer__title">Контакты</h3>
+      <ul class="footer__list">
+        <li><a href="tel:+79591635000">+7 959 163-50-00</a></li>
+        <li><a href="mailto:mazhaev0319@gmail.com">mazhaev0319@gmail.com</a></li>
+        <li><a href="https://vk.ru/club240399333" target="_blank" rel="noopener">${vkSvg} ВКонтакте</a></li>
+      </ul>
+      <p class="footer__schedule">
+        <strong>График работы:</strong><br>
+        Пн — выходной<br>Вт–Чт 08:00–17:00<br>Пт–Сб 08:00–18:00<br>Вс 08:00–17:00
+      </p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <span>© <span data-current-year>2025</span> «Улов 100 Пудов».</span>
+      <span>Информация на сайте не является публичной офертой.</span>
+    </div>
+  </div>
+`;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const headerEl = document.getElementById('site-header');
+  const footerEl = document.getElementById('site-footer');
+  
+  if (headerEl) headerEl.innerHTML = headerHTML;
+  if (footerEl) footerEl.innerHTML = footerHTML;
+});

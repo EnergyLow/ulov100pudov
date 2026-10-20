@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Контакты — Улов 100 Пудов</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230B3D5C'/%3E%3Cellipse cx='15' cy='17' rx='8' ry='5' fill='%23FF8A3D'/%3E%3Cpath d='M23 17l6-4v8z' fill='%23FF8A3D'/%3E%3C/svg%3E">
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    .contacts-page { padding-block: 40px 80px; }
+    .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .contact-card { background: #fff; border: 1px solid var(--c-border); padding: 32px; border-radius: var(--radius); }
+    .contact-card h3 { font-size: 20px; margin-bottom: 16px; color: var(--c-primary); }
+    .contact-row { margin-bottom: 20px; }
+    .contact-row strong { display: block; font-size: 13px; color: var(--c-muted); text-transform: uppercase; margin-bottom: 4px; }
+    .contact-row a { font-size: 18px; font-weight: 700; color: var(--c-accent); }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="site-header"></header>
+
+  <main class="contacts-page">
+    <div class="container">
+      <h1 class="page-head__title" style="margin-bottom: 32px;">Контакты</h1>
+      
+      <div class="contacts-grid">
+        <div class="contact-card">
+          <h3>Связаться с нами</h3>
+          <div class="contact-row">
+            <strong>Телефон</strong>
+            <a href="tel:+79591635000">+7 959 163-50-00</a>
+          </div>
+          <div class="contact-row">
+            <strong>Email</strong>
+            <a href="mailto:mazhaev0319@gmail.com">mazhaev0319@gmail.com</a>
+          </div>
+          <div class="contact-row">
+            <strong>ВКонтакте</strong>
+            <a href="https://vk.ru/club240399333" target="_blank" rel="noopener">Группа магазина</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <h3>Режим работы</h3>
+          <p style="font-size: 16px; line-height: 2; color: var(--c-text-soft);">
+            <strong style="color: var(--c-danger);">Понедельник:</strong> Выходной<br>
+            <strong>Вторник – Четверг:</strong> 08:00 – 17:00<br>
+            <strong>Пятница – Суббота:</strong> 08:00 – 18:00<br>
+            <strong>Воскресенье:</strong> 08:00 – 17:00
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+  <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

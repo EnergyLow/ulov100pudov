@@ -1,0 +1,13 @@
+{
+  "routes": [
+    {
+      "routePath": "/api/products",
+      "mountPath": "/api",
+      "method": "GET",
+      "module": [
+        "api/products.js:onRequestGet"
+      ]
+    }
+  ],
+  "baseURL": "/"
+}

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /checkout.html
+Disallow: /cart.html
+
+Sitemap: https://tatnet-адрес-сайта/sitemap.xml

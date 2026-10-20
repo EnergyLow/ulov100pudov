@@ -1,0 +1,11 @@
+# Игнорируем папки со служебными скриптами и базами
+tools/
+db/
+functions/
+wrangler.toml
+
+# Системный мусор
+.DS_Store
+Thumbs.db
+.vscode/
+node_modules/

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Отзывы — Улов 100 Пудов</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230B3D5C'/%3E%3Cellipse cx='15' cy='17' rx='8' ry='5' fill='%23FF8A3D'/%3E%3Cpath d='M23 17l6-4v8z' fill='%23FF8A3D'/%3E%3C/svg%3E">
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    .reviews-page { padding-block: 40px 80px; }
+    .reviews-layout { display: grid; grid-template-columns: 1fr 400px; gap: 40px; align-items: start; }
+    .review-card { background: #fff; border: 1px solid var(--c-border); padding: 24px; border-radius: var(--radius); margin-bottom: 20px; }
+    .review-header { display: flex; justify-content: space-between; margin-bottom: 12px; }
+    .review-author { font-weight: 700; color: var(--c-primary); }
+    .review-date { font-size: 13px; color: var(--c-muted); }
+    .review-stars { color: var(--c-cta); font-size: 18px; margin-bottom: 10px; }
+    .review-text { font-size: 15px; color: var(--c-text-soft); }
+    .review-form { background: var(--c-bg-soft); padding: 24px; border-radius: var(--radius); position: sticky; top: 100px; }
+    .review-form h3 { margin-bottom: 16px; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="site-header"></header>
+
+  <main class="reviews-page">
+    <div class="container">
+      <h1 class="page-head__title" style="margin-bottom: 32px;">Отзывы покупателей</h1>
+      
+      <div class="reviews-layout">
+        <div class="reviews-list">
+          <!-- Пример отзыва 1 -->
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-author">Александр</div>
+              <div class="review-date">12 октября 2026</div>
+            </div>
+            <div class="review-stars">★★★★★</div>
+            <div class="review-text">Брал фидер KAIDA LEVEL FEEDER. За такие деньги — отличное качество! Плетенка тоже супер, не путается. Продавец подсказал по оснастке, спасибо!</div>
+          </div>
+          
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-author">Дмитрий</div>
+              <div class="review-date">05 октября 2026</div>
+            </div>
+            <div class="review-stars">★★★★★</div>
+            <div class="review-text">Заказывал термос Арктика и бойлы FFEM. Доставили быстро, всё упаковано отлично. Термос реально держит тепло сутки. Буду брать еще.</div>
+          </div>
+        </div>
+
+        <form class="review-form" action="https://api.web3forms.com/submit" method="POST">
+          <h3>Оставить отзыв</h3>
+          
+          <div class="form-group" style="margin-bottom: 12px;">
+            <input type="text" name="name" required placeholder="Ваше имя" style="width: 100%; padding: 10px; border: 1px solid var(--c-border); border-radius: 8px;">
+          </div>
+          
+          <div class="form-group" style="margin-bottom: 12px;">
+            <select name="rating" required style="width: 100%; padding: 10px; border: 1px solid var(--c-border); border-radius: 8px;">
+              <option value="">Оценка...</option>
+              <option value="5">5 звезд</option>
+              <option value="4">4 звезды</option>
+              <option value="3">3 звезды</option>
+              <option value="2">2 звезды</option>
+              <option value="1">1 звезда</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 16px;">
+            <textarea name="message" required placeholder="Текст отзыва" rows="4" style="width: 100%; padding: 10px; border: 1px solid var(--c-border); border-radius: 8px; resize: vertical;"></textarea>
+          </div>
+
+          <input type="hidden" name="access_key" value="773e5883-3977-432a-91c8-8a06343a78ce">
+          <input type="hidden" name="subject" value="Новый отзыв на сайте Улов 100 Пудов">
+          
+          <button type="submit" class="btn btn--primary" style="width: 100%;">Отправить отзыв</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+  <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
