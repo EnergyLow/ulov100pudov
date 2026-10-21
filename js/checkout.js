@@ -48,23 +48,37 @@ if (form) {
     const btn = document.getElementById('submit-btn');
     const formData = new FormData(form);
     
-    // Добавляем состав корзины в письмо
+    // Собираем данные из формы в объект для JSON
+    const data = {
+      name: formData.get('name'),
+      phone: formData.get('phone'),
+      delivery: formData.get('delivery'),
+      address: formData.get('address') || '—',
+      comment: formData.get('comment') || '—',
+    };
+
+    // Добавляем состав корзины
     const cart = getCart();
-    const cartText = cart.map(i => `${i.name} (Арт: ${i.sku}) - ${i.qty} шт.`).join('\n');
-    formData.append('Корзина', cartText);
-    formData.append('Сумма', formatPrice(cart.reduce((s, i) => s + i.price * i.qty, 0)));
+    const cartText = cart.map(i => `${i.name} (Арт: ${i.sku}) — ${i.qty} шт.`).join('\n');
+    data['Корзина'] = cartText;
+    data['Сумма'] = formatPrice(cart.reduce((s, i) => s + i.price * i.qty, 0));
 
     btn.textContent = 'Отправка...';
     btn.disabled = true;
 
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData
-      });
-      const data = await res.json();
+      // Ваш уникальный Endpoint с onsubmit.dev
+      const ENDPOINT = 'https://onsubmit.dev/f/hoc6edux'; 
       
-      if (data.success) {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      
+      const result = await res.json();
+      
+      if (result.ok) {
         saveCart([]); // Очищаем корзину
         document.querySelector('.checkout-layout').innerHTML = `
           <div class="state" style="grid-column: 1 / -1; background: #fff;">
@@ -74,9 +88,10 @@ if (form) {
           </div>
         `;
       } else {
-        throw new Error(data.message || 'Ошибка отправки');
+        throw new Error(result.error || 'Ошибка отправки');
       }
     } catch (error) {
+      console.error('Order error:', error);
       alert('Ошибка при отправке заказа. Пожалуйста, позвоните нам: +7 959 163-50-00');
       btn.textContent = 'Отправить заказ';
       btn.disabled = false;
@@ -97,11 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
   deliveryRadios.forEach(radio => {
     radio.addEventListener('change', (e) => {
       if (e.target.value === 'Доставка') {
-        // Показываем адрес и делаем его обязательным
         addressGroup.hidden = false;
         addressInput.required = true;
       } else {
-        // Скрываем адрес, убираем обязательность и очищаем
         addressGroup.hidden = true;
         addressInput.required = false;
         addressInput.value = '';
