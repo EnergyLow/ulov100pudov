@@ -1,2 +1,0 @@
-# Если хотите, чтобы product.html?id=1 превращался в /product/1
-/product/:id  /product.html?id=:id  200
