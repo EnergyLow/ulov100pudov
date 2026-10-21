@@ -46,39 +46,30 @@ if (form) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('submit-btn');
+    
+    // Собираем данные формы через FormData
     const formData = new FormData(form);
     
-    // Собираем данные из формы в объект для JSON
-    const data = {
-      name: formData.get('name'),
-      phone: formData.get('phone'),
-      delivery: formData.get('delivery'),
-      address: formData.get('address') || '—',
-      comment: formData.get('comment') || '—',
-    };
-
-    // Добавляем состав корзины
+    // Добавляем состав корзины и сумму
     const cart = getCart();
     const cartText = cart.map(i => `${i.name} (Арт: ${i.sku}) — ${i.qty} шт.`).join('\n');
-    data['Корзина'] = cartText;
-    data['Сумма'] = formatPrice(cart.reduce((s, i) => s + i.price * i.qty, 0));
+    formData.append('Корзина', cartText);
+    formData.append('Сумма', formatPrice(cart.reduce((s, i) => s + i.price * i.qty, 0)));
 
     btn.textContent = 'Отправка...';
     btn.disabled = true;
 
     try {
-      // Ваш уникальный Endpoint с onsubmit.dev
       const ENDPOINT = 'https://onsubmit.dev/f/hoc6edux'; 
       
+      // Отправляем как FormData (без заголовка Content-Type)
       const res = await fetch(ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: formData
       });
       
-      const result = await res.json();
-      
-      if (result.ok) {
+      // Проверяем только HTTP-статус (200-299 = успех)
+      if (res.ok) {
         saveCart([]); // Очищаем корзину
         document.querySelector('.checkout-layout').innerHTML = `
           <div class="state" style="grid-column: 1 / -1; background: #fff;">
@@ -88,11 +79,13 @@ if (form) {
           </div>
         `;
       } else {
-        throw new Error(result.error || 'Ошибка отправки');
+        // Если сервер вернул ошибку, показываем её
+        const errorText = await res.text();
+        throw new Error(`Ошибка сервера: ${res.status}. ${errorText}`);
       }
     } catch (error) {
       console.error('Order error:', error);
-      alert('Ошибка при отправке заказа. Пожалуйста, позвоните нам: +7 959 163-50-00');
+      alert(`Ошибка при отправке: ${error.message}. Пожалуйста, позвоните нам: +7 959 163-50-00`);
       btn.textContent = 'Отправить заказ';
       btn.disabled = false;
     }
