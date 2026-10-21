@@ -47,10 +47,7 @@ if (form) {
     e.preventDefault();
     const btn = document.getElementById('submit-btn');
     
-    // Собираем данные формы через FormData
     const formData = new FormData(form);
-    
-    // Добавляем состав корзины и сумму
     const cart = getCart();
     const cartText = cart.map(i => `${i.name} (Арт: ${i.sku}) — ${i.qty} шт.`).join('\n');
     formData.append('Корзина', cartText);
@@ -62,14 +59,16 @@ if (form) {
     try {
       const ENDPOINT = 'https://onsubmit.dev/f/hoc6edux'; 
       
-      // Отправляем как FormData (без заголовка Content-Type)
+      // redirect: 'manual' запрещает fetch автоматически следовать редиректу на thank-you страницу
       const res = await fetch(ENDPOINT, {
         method: 'POST',
-        body: formData
+        body: formData,
+        redirect: 'manual' // <-- Ключевое изменение
       });
       
-      // Проверяем только HTTP-статус (200-299 = успех)
-      if (res.ok) {
+      // При redirect: 'manual' браузер возвращает статус 0 и тип 'opaqueredirect' для успешного редиректа.
+      // Это ожидаемое поведение, означающее, что запрос был принят сервером.
+      if (res.type === 'opaqueredirect' || res.status === 0 || res.status === 201 || res.ok) {
         saveCart([]); // Очищаем корзину
         document.querySelector('.checkout-layout').innerHTML = `
           <div class="state" style="grid-column: 1 / -1; background: #fff;">
@@ -79,8 +78,8 @@ if (form) {
           </div>
         `;
       } else {
-        // Если сервер вернул ошибку, показываем её
-        const errorText = await res.text();
+        // Если сервер вернул ошибку, пытаемся прочитать текст ответа
+        const errorText = await res.text().catch(() => 'Не удалось прочитать ответ');
         throw new Error(`Ошибка сервера: ${res.status}. ${errorText}`);
       }
     } catch (error) {
